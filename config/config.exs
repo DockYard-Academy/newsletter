@@ -24,16 +24,10 @@ config :newsletter, NewsletterWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-# config :newsletter, Newsletter.Mailer, adapter: Swoosh.Adapters.Local
+config :newsletter, Newsletter.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
-# config :swoosh, :api_client, false
-
-config :newsletter, Newsletter.Mailer,
-  adapter: Swoosh.Adapters.Sendgrid,
-  api_key: System.get_env("SENDGRID_API_KEY")
-
-config :swoosh, :api_client, Swoosh.ApiClient.Hackney
+config :swoosh, :api_client, false
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -52,6 +46,12 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+# Oban
+config :newsletter, Oban,
+  repo: Newsletter.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

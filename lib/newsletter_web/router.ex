@@ -17,8 +17,8 @@ defmodule NewsletterWeb.Router do
   scope "/", NewsletterWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-    resources "/subscribers", SubscriberController
+    get "/", SubscriberController, :new
+    post "/", SubscriberController, :create
   end
 
   # Other scopes may use custom stacks.

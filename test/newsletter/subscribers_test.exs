@@ -36,14 +36,19 @@ defmodule Newsletter.SubscribersTest do
       subscriber = subscriber_fixture()
       update_attrs = %{email: "some updated email", name: "some updated name"}
 
-      assert {:ok, %Subscriber{} = subscriber} = Subscribers.update_subscriber(subscriber, update_attrs)
+      assert {:ok, %Subscriber{} = subscriber} =
+               Subscribers.update_subscriber(subscriber, update_attrs)
+
       assert subscriber.email == "some updated email"
       assert subscriber.name == "some updated name"
     end
 
     test "update_subscriber/2 with invalid data returns error changeset" do
       subscriber = subscriber_fixture()
-      assert {:error, %Ecto.Changeset{}} = Subscribers.update_subscriber(subscriber, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Subscribers.update_subscriber(subscriber, @invalid_attrs)
+
       assert subscriber == Subscribers.get_subscriber!(subscriber.id)
     end
 

@@ -15,9 +15,10 @@ defmodule Newsletter.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Newsletter.PubSub},
       # Start the Endpoint (http/https)
-      NewsletterWeb.Endpoint
+      NewsletterWeb.Endpoint,
       # Start a worker by calling: Newsletter.Worker.start_link(arg)
-      # {Newsletter.Worker, arg}
+      # {Newsletter.Worker, arg},
+      {Oban, Application.fetch_env!(:newsletter, Oban)}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
