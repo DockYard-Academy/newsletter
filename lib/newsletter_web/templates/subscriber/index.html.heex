@@ -1,0 +1,28 @@
+<h1>Listing Subscribers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for subscriber <- @subscribers do %>
+    <tr>
+      <td><%= subscriber.name %></td>
+      <td><%= subscriber.email %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.subscriber_path(@conn, :show, subscriber) %></span>
+        <span><%= link "Edit", to: Routes.subscriber_path(@conn, :edit, subscriber) %></span>
+        <span><%= link "Delete", to: Routes.subscriber_path(@conn, :delete, subscriber), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Subscriber", to: Routes.subscriber_path(@conn, :new) %></span>
